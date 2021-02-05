@@ -34,7 +34,7 @@ highlight_markdown = misaka.Markdown(
 
 
 def MD_to_HTML(field, media_folder):
-    """ Takes a MD text as string and returns HTML translation string. """
+    """ Takes a MD text as string and returns HTML translation as a string. """
 
     # $...$     --->  \(...\)
     # $$...$$   --->  \[...\]
@@ -58,7 +58,7 @@ def MD_to_HTML(field, media_folder):
 
     return highlight_markdown(field)
 
-
+# Also from ankdown
 def simple_hash(text):
     """MD5 of text, mod 2^63. Probably not a great hash function."""
     h = hashlib.md5()
