@@ -33,7 +33,7 @@ The resulting apkg file will be stored in the current working directory.
 Create a deck called yamdai with a subdeck called subyamdai.
 Each note in this deck has the tags tag1 and tag2::subtag1
 
-```markdown
+~~~markdown
 # Yamdai_example
 yamdai::subyamdai
 
@@ -70,10 +70,10 @@ Make sure the image is located in Anki's collection.media folder
 
 ## Code
 
-\`\`\`\`python
+````python
 import numpy as np
 print("Hello World!")
-\`\`\`\`
-```
+````
+~~~
 
 
