@@ -3,92 +3,61 @@ import hashlib
 import misaka
 import re
 import sys
+import pkg_resources
+import textwrap
+import houdini as h
+from pygments import highlight
+from pygments.formatters.html import HtmlFormatter
+from pygments.formatters import ClassNotFound
+from pygments.lexers import get_lexer_by_name
 
 
-# TODOS
-# backslash becomes double backslash when reading file.
+# https://misaka.61924.nl/
+class HighlighterRenderer(misaka.HtmlRenderer):
+    def blockcode(self, text, lang):
+        try:
+            lexer = get_lexer_by_name(lang, stripall=True)
+        except ClassNotFound:
+            lexer = None
 
-# < ---> &lt;
-# > ---> &gt;
-# & ---> &amp;
-
-# Turn $...$ into \(...\)
-# and
-
-# $$...$$
-
-# into \[...\]
-
-# Helper functions
-
-
-# # TestFile
-# test::subdeck
-# tag1  tag2::subtag
-#    tag3
-# 
-# 
-# ## This text here should be < > &
-
-# $$
-# \Lambda = \sum_i^\infty
-# $$
+        if lexer:
+            formatter = HtmlFormatter(style='emacs')
+            return highlight(text, lexer, formatter)
+        # default
+        return '\n<pre><code>{}</code></pre>\n'.format(
+            h.escape_html(text.strip()))
 
 
-# ![image-20210122114046628](C:\Users\Computer\AppData\Roaming\Anki2\Fatih\collection.media\image-20210117093000871.png)
+renderer = HighlighterRenderer()
+highlight_markdown = misaka.Markdown(
+    renderer, extensions=("fenced-code", "math"))
 
-# $\Lambda = \sum_i^\infty$
 
-# ````python
-# import numpy as np
-# print("hi")
-
-# ````
-
-# ------------------------------------------------------
-
-# <div>This text here should be &lt; &gt; &amp;<br><\div>
-
-# <div>
-# \[
-# \Lambda = \sum_i^\infty
-# \]<br>
-# <br>
-# <img src="image-20210117093000871.png">
-# <br>
-# \(\Lambda = \sum_i^\infty\)
-# </div>
 def MD_to_HTML(field, media_folder):
     """ Takes a MD text as string and returns HTML translation string. """
 
     # $...$     --->  \(...\)
     # $$...$$   --->  \[...\]
-    # From ankdown
+    # from ankdwown
     for (sep, (op, cl)) in [("$$", (r"\\[", r"\\]")), ("$", (r"\\(", r"\\)"))]:
         escaped_sep = sep.replace(r"$", r"\$")
-        field = re.split(r"(?<!\\){}".format(escaped_sep), field) 
+        # ignore escaped dollar signs when splitting the field
+        field = re.split(r"(?<!\\){}".format(escaped_sep), field)
         # add op(en) and cl(osing) brackets to every second element of the list
-        field[1::2] = [op + e + cl for e in field[1::2]] 
+        # and remove line breaks.
+        field[1::2] = [op + re.sub('\\n', "", e) + cl for e in field[1::2]]
         field = "".join(field)
-    # > ---> &gt;
-    # < ---> &lt;
-    # done by misaka
-
-    # \n ---> <br>
 
     # ![...](...collection.media\img.png) ---> ![...](img.png)
-    # conversion to html by misaka
+
+    # find everything between media_folder and )
     regex = media_folder + r'\(.+?)\)'
     for img in re.findall(regex, field):
-        regs = r'\]\(.+?'+ img + r'\)'
-        field = re.sub(regs, r"\]\(" + img + r"\)", field)
+        regs = r'!\[.+?' + '\]\(.+?' + img + r'\)'
+        field = re.sub(regs, '<img src=\"' + img + '\">', field)
 
-    return misaka.html(field, extensions=["math", "fenced-code"])
+    return highlight_markdown(field)
 
-
-
-# IMG_HTML = lambda x: \
-#   "<img src=\"" + re.split(media_folder, x)[-1] + "\">"
 
 def simple_hash(text):
     """MD5 of text, mod 2^63. Probably not a great hash function."""
@@ -96,6 +65,24 @@ def simple_hash(text):
     h.update(text.encode("utf-8"))
     return int(h.hexdigest(), 16) % (1 << 63)
 
+css_style = """ 
+        .card {
+            font-family: aerial;
+            font-size: 20px;
+            text-align: center;
+            color: black;
+            background-color: white;
+            list-style-position: inside;
+            }
+
+    
+        """
+
+
+css_file_path = pkg_resources.resource_filename('yamdai', 'code_highlight.css') 
+
+with open(css_file_path) as css_file:
+        css_style += css_file.read().replace('\n', '')
 
 # From genanki readme
 my_model = genanki.Model(
@@ -111,5 +98,6 @@ my_model = genanki.Model(
             'qfmt': '{{Question}}',
             'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}',
         }
-    ]
+    ],
+    css=css_style
 )

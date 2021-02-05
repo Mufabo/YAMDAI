@@ -23,10 +23,12 @@ setup(name='yamdai',
         'genanki',
         'setuptools',
         'misaka',
+        'pygments'
         ],
       entry_points={
         "console_scripts": [
             "yamdai=yamdai.yamdai:main"
         ]
       },
+      package_data = {'yamdai': ['code_highlight.css']},
       zip_safe=False)
