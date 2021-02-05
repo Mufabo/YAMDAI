@@ -10,9 +10,18 @@ I didn't like how those handled tags, thus my own version.
 
 ## Installation
 
+### Windows
+
 From the command line:
 
 ```pip install git+https://github.com/Mufabo/YAMDAI```
+
+### Linux
+
+Requires !(houdini)[https://pypi.org/project/houdini/]
+
+At the moment it gives an error when running on Linux.
+I am working on it
 
 ## How to create markdown files for YAMDAI
 
