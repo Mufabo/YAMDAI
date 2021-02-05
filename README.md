@@ -68,7 +68,7 @@ $$
 \sum_i^\infty \gamma
 $$
 
- ## Just text
+## Just text
 
 Paris is the capitol of France
 
