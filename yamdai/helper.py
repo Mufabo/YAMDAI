@@ -48,7 +48,7 @@ def MD_to_HTML(field, media_folder):
         field[1::2] = [op + re.sub('\\n', "", e) + cl for e in field[1::2]]
         field = "".join(field)
 
-    # ![...](...collection.media\img.png) ---> ![...](img.png)
+    # ![...](...collection.media\img.png) ---> <img src='img.png'>
     # find everything between media_folder with slashes and )
     regex = media_folder + r'\(.+?)\)' if sys.platform == 'win32' else media_folder + r'(.+?)' + r'\)'
     for img in re.findall(regex, field):
