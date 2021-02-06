@@ -4,3 +4,4 @@ __pycache__/
 houdini/
 *.egg-info/
 Yamdai_example.apkg
+..gitignore*
