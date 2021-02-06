@@ -54,8 +54,10 @@ YAMDAI is executed using the command line:
 
 ```python -m yamdai.yamdai Path/to/markdownFile```
 
-The resulting apkg file will be stored in the current working directory.
-The apkf file can be imported from within Anki by clicking on File and then choosing
+Replacy python with python3 on a Linux machine.
+
+The resulting Anki package (.apkg file) will be stored in the current working directory.
+The apkg file can be imported from within Anki by clicking on File and then choosing
 import or CTRL+SHIFT+I from within Anki
 
 ## Example markdown file
