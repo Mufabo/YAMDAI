@@ -1,5 +1,6 @@
 .vscode/
 yamdai.egg-info/
 __pycache__/
-
+houdini/
 *.egg-info/
+Yamdai_example.apkg

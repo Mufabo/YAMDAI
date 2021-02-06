@@ -10,7 +10,7 @@ def main(args):
   # Start processing file
 
   # foldername depending on OS
-  media_folder = 'collection.media\\' if sys.platform == 'win32' else 'collection.media/'
+  media_folder = 'collection.media\\' if sys.platform == 'win32' else r'collection.media/'
 
   FILE_PATH = str(args)
   file = open(FILE_PATH, "r")

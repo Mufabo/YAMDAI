@@ -45,7 +45,7 @@ import numpy as np
 print("Hello World!")
 ````
 
-![Samojed - Wikipedija, prosta enciklopedija](C:\Users\Computer\AppData\Roaming\Anki2\Fatih\collection.media\picture)
+![Samojed - Wikipedija, prosta enciklopedija](/mnt/c/Users/Computer/AppData/Roaming/Anki2/Fatih/collection.media/picture)
 
 
 Paris is the capitol of France

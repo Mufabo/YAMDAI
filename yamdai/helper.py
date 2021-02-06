@@ -49,12 +49,11 @@ def MD_to_HTML(field, media_folder):
         field = "".join(field)
 
     # ![...](...collection.media\img.png) ---> ![...](img.png)
-
-    # find everything between media_folder and )
-    regex = media_folder + r'\(.+?)\)'
+    # find everything between media_folder with slashes and )
+    regex = media_folder + r'\(.+?)\)' if sys.platform == 'win32' else media_folder + r'(.+?)' + r'\)'
     for img in re.findall(regex, field):
-        regs = r'!\[.+?' + '\]\(.+?' + img + r'\)'
-        field = re.sub(regs, '<img src=\"' + img + '\">', field)
+        regs = r'!\[.+?' + r'\]\(.+?' + img + r'\)'
+        field = re.sub(regs, r'<img src="' + img + r'">', field)
 
     return highlight_markdown(field)
 
