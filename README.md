@@ -18,10 +18,11 @@ From the command line:
 
 ### Linux
 
-Requires !(houdini)[https://pypi.org/project/houdini/]
+Requires ![houdini](https://pypi.org/project/houdini/)
 
-At the moment it gives an error when running on Linux.
-I am working on it
+From the command line:
+
+```pip3 install git+https://github.com/Mufabo/YAMDAI```
 
 ## How to create markdown files for YAMDAI
 
@@ -30,9 +31,10 @@ The first line is a level-1 header (line starts with #) and will be the name of 
 The next line is the name of the deck. 
 If you want to use a subdeck separate parent deck with double colons from subdecks.
 
+
 The following lines contain tags. 
 Subtags are separated using double colons.
-The usage of sub-tags probably requires the respective add-on.
+(Requires Hierarchical Tags 2 add-on)
 All tags will be used for all cards.
 
 Now start the actual cards.
@@ -84,7 +86,7 @@ Paris is the capitol of France
 Berlin is the capitol of Germany
 
 ## Image 
-Make sure the image is located in Anki's collection.media folder
+Make sure the image is located in Anki's collection.media folder.
 
 ![Samojed - Wikipedija, prosta enciklopedija](C:\Users\Computer\AppData\Roaming\Anki2\Fatih\collection.media\picture)
 
