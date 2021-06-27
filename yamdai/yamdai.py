@@ -6,9 +6,8 @@ import genanki
 import yamdai.helper as hlpr
 import click
 
-
-def main(args):
-    
+def main():
+  args = sys.argv[1]  
   # Start processing file
 
   # foldername depending on OS
@@ -79,4 +78,4 @@ def main(args):
   file.close()
 
 if __name__ == '__main__':
-  main(sys.argv[1])
+  main()

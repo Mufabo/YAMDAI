@@ -18,8 +18,6 @@ From the command line:
 
 ### Linux
 
-Requires ![houdini](https://pypi.org/project/houdini/)
-
 From the command line:
 
 ```pip3 install git+https://github.com/Mufabo/YAMDAI```
@@ -52,7 +50,7 @@ Yamdai supports...
 
 YAMDAI is executed using the command line:
 
-```python -m yamdai.yamdai Path/to/markdownFile```
+```yamdai Path/to/markdownFile```
 
 Replacy python with python3 on a Linux machine.
 
