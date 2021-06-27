@@ -20,10 +20,12 @@ setup(name='yamdai',
       license='MIT',
       packages= find_packages(),
       install_requires=[
+        'click',
         'genanki',
         'setuptools',
         'misaka',
-        'pygments'
+        'pygments',
+        'houdini.py'
         ],
       entry_points={
         "console_scripts": [

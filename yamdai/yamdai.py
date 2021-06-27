@@ -4,6 +4,8 @@ import misaka  # for converting to html
 import hashlib
 import genanki
 import yamdai.helper as hlpr
+import click
+
 
 def main(args):
     
@@ -75,5 +77,6 @@ def main(args):
   genanki.Package(DECK).write_to_file(FILE_NAME+".apkg")
 
   file.close()
+
 if __name__ == '__main__':
   main(sys.argv[1])
